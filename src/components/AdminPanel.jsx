@@ -41,7 +41,7 @@ export default function AdminPanel({ products, setProducts, onBack }) {
     <div style={{ minHeight: "100vh", background: "#F5F3F0" }}>
       {/* Header */}
       <div style={{ background: "var(--charcoal)", position: "sticky", top: 0, zIndex: 40 }}>
-        <div className="admin-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 60 }}>
+        <div className="admin-header" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 60 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <Logo size={36} />
             <div>
