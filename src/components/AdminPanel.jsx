@@ -49,10 +49,10 @@ export default function AdminPanel({ products, setProducts, onBack }) {
               <div style={{ fontSize: 10, color: "var(--gold)", fontFamily: "'Jost',sans-serif", letterSpacing: "0.1em" }}>FARAZ ABAYA</div>
             </div>
           </div>
-          <div className="admin-actions" style={{ display: "flex", gap: 10 }}>
-            <button className="btn-gold" onClick={openAdd} style={{ padding: "8px 16px", borderRadius: 12, fontFamily: "'Jost',sans-serif", fontSize: 13 }}>＋ Add Product</button>
-            <button onClick={onBack} style={{ padding: "8px 14px", borderRadius: 12, background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.15)", color: "#FAF8F5", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13 }}>← Store</button>
-            <button onClick={logout} style={{ padding: "8px 14px", borderRadius: 12, background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.2)", color: "#FAF8F5", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13 }}>Logout</button>
+          <div className="admin-actions" style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }}>
+            <button className="btn-gold" onClick={openAdd} style={{ padding: "8px 16px", borderRadius: 12, fontFamily: "'Jost',sans-serif", fontSize: 13, flex: "1 1 140px", minWidth: 0 }}>＋ Add Product</button>
+            <button onClick={onBack} style={{ padding: "8px 14px", borderRadius: 12, background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.15)", color: "#FAF8F5", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13, flex: "1 1 110px", minWidth: 0 }}>← Store</button>
+            <button onClick={logout} style={{ padding: "8px 14px", borderRadius: 12, background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.2)", color: "#FAF8F5", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13, flex: "1 1 110px", minWidth: 0 }}>Logout</button>
           </div>
         </div>
       </div>
