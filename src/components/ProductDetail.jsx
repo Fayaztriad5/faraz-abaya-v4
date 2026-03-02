@@ -29,7 +29,7 @@ export default function ProductDetail({ p, onBack }) {
     return (
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 80px" }}>
         <button onClick={onBack} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>
-          ? Back
+          {"\u2190"} Back
         </button>
         <div className="font-display" style={{ fontSize: 28, color: "var(--charcoal)" }}>
           Product not found
@@ -44,7 +44,7 @@ export default function ProductDetail({ p, onBack }) {
       setTimeout(() => setErr(false), 2500);
       return;
     }
-    const msg = `Assalamu Alaikum! I want to order the ${p.name} (Size: ${size}) for ?${p.price.toLocaleString()}. Please confirm availability.`;
+    const msg = `Assalamu Alaikum! I want to order the ${p.name} (Size: ${size}) for \u20B9${p.price.toLocaleString()}. Please confirm availability.`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -61,7 +61,7 @@ export default function ProductDetail({ p, onBack }) {
   return (
     <div className="fade-up" style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 80px" }}>
       <button onClick={onBack} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>
-        ? Back
+        {"\u2190"} Back
       </button>
 
       <div className="detail-grid">
@@ -69,9 +69,9 @@ export default function ProductDetail({ p, onBack }) {
           <div style={{ borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", marginBottom: 10 }}>
             <img src={p.imgs[img]} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all .5s" }} />
           </div>
-          <div style={{ display: "flex", gap: 8 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, padding: 8, border: "1px solid rgba(201,168,76,.2)", borderRadius: 12, background: "#fff" }}>
             {p.imgs.map((src, i) => (
-              <div key={i} className={`thumb ${img === i ? "active" : ""}`} onClick={() => setImg(i)} style={{ flex: 1, height: 70 }}>
+              <div key={i} className={`thumb ${img === i ? "active" : ""}`} onClick={() => setImg(i)} style={{ aspectRatio: "3/4", minHeight: 82 }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
             ))}
@@ -84,16 +84,16 @@ export default function ProductDetail({ p, onBack }) {
 
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Stars r={p.rating} />
-            <span style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif" }}>{p.rating} � {p.reviews} reviews</span>
+            <span style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif" }}>{p.rating} · {p.reviews} reviews</span>
           </div>
 
           <div className="divider" />
 
-          <div className="font-display detail-price" style={{ fontWeight: 600, color: "var(--charcoal)", marginBottom: 4 }}>?{p.price.toLocaleString()}</div>
+          <div className="font-display detail-price" style={{ fontWeight: 600, color: "var(--charcoal)", marginBottom: 4 }}>{"\u20B9"}{p.price.toLocaleString()}</div>
           <div style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif", marginBottom: 16 }}>Inclusive of all taxes</div>
 
           <div style={{ background: "var(--pearl-dark)", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 16 }}>?</span>
+            <span style={{ fontSize: 16 }}>{"\u2728"}</span>
             <span style={{ fontFamily: "'Jost',sans-serif", fontSize: 13 }}><strong>Fabric:</strong> {p.fabric}</span>
           </div>
 
@@ -102,7 +102,7 @@ export default function ProductDetail({ p, onBack }) {
           <div style={{ marginBottom: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
               <span style={{ fontFamily: "'Jost',sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--charcoal)" }}>Select Size</span>
-              {err && <span style={{ fontSize: 12, color: "#e53e3e", fontFamily: "'Jost',sans-serif" }}>? Please select a size</span>}
+              {err && <span style={{ fontSize: 12, color: "#e53e3e", fontFamily: "'Jost',sans-serif" }}>{"\u26A0"} Please select a size</span>}
             </div>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               {["52", "54", "56", "58"].map((s) => (
@@ -116,7 +116,7 @@ export default function ProductDetail({ p, onBack }) {
           <div className="divider" />
 
           <div className="trust-grid" style={{ marginBottom: 16 }}>
-            {[["??", "Free Delivery", "Orders ?1999+"], ["??", "Easy Returns", "7-day policy"], ["?", "100% Authentic", "Original fabric"]].map(([icon, t, s]) => (
+            {[["\uD83D\uDE9A", "Free Delivery", "Orders \u20B91999+"], ["\uD83D\uDD04", "Easy Returns", "7-day policy"], ["\u2705", "100% Authentic", "Original fabric"]].map(([icon, t, s]) => (
               <div className="trust-card" key={t}>
                 <div style={{ fontSize: 20 }}>{icon}</div>
                 <div style={{ fontSize: 11, fontWeight: 700, color: "var(--charcoal)", fontFamily: "'Jost',sans-serif", marginTop: 4 }}>{t}</div>
