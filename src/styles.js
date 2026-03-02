@@ -473,10 +473,54 @@ const globalStyles = `
   }
 
   /* Admin responsive */
+  .admin-header { gap: 16px; }
+  .admin-actions-wrap {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .admin-primary { display: flex; }
+  .admin-secondary { display: flex; gap: 10px; }
+  .admin-btn {
+    min-height: 42px;
+    padding: 8px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.22);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: .01em;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .admin-btn-add {
+    border: 1px solid rgba(201,168,76,.85);
+    color: #1C1C1E;
+    background: linear-gradient(135deg, #C9A84C, #E8C96A);
+    box-shadow: 0 8px 20px rgba(201,168,76,.34);
+  }
+  .admin-btn-ghost {
+    color: #FAF8F5;
+    background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  }
+  @media (hover: hover) {
+    .admin-btn:hover { transform: translateY(-1px); }
+    .admin-btn-add:hover { box-shadow: 0 10px 24px rgba(201,168,76,.42); }
+    .admin-btn-ghost:hover { border-color: rgba(201,168,76,.45); }
+  }
   @media (max-width: 720px) {
-    .admin-header { flex-direction: column; align-items: flex-start; gap: 10px; height: auto; padding: 14px 20px; }
-    .admin-actions { width: 100%; flex-wrap: wrap; }
-    .admin-actions button { flex: 1 1 auto; }
+    .admin-header { flex-direction: column; align-items: stretch; gap: 12px; height: auto; padding: 14px 20px; }
+    .admin-actions-wrap { width: 100%; margin-left: 0; flex-direction: column; align-items: stretch; gap: 10px; }
+    .admin-primary, .admin-secondary { width: 100%; }
+    .admin-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .admin-btn { width: 100%; min-height: 44px; }
+  }
+  @media (max-width: 420px) {
+    .admin-secondary { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     .admin-table thead { display: none; }
