@@ -3,6 +3,23 @@ import { CATS } from "../mockData";
 import Logo from "./Logo";
 import { useCart } from "../context/CartContext";
 
+const CartIcon = ({ size = 14 }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: size, height: size }}
+    aria-hidden="true"
+  >
+    <circle cx="9" cy="20" r="1.5" />
+    <circle cx="18" cy="20" r="1.5" />
+    <path d="M3 4h2l2.2 10.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.5L22 7H7" />
+  </svg>
+);
+
 export default function Navbar({ onNav, search, setSearch, cat, setCat }) {
   const { totalQty, toggleCart } = useCart();
   const [dropOpen, setDropOpen] = useState(false);
@@ -106,7 +123,8 @@ export default function Navbar({ onNav, search, setSearch, cat, setCat }) {
             </div>
 
             <button onClick={toggleCart} className="cart-btn" style={{ background: "none", border: "1px solid rgba(201,168,76,.3)", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13, color: "var(--charcoal)", display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", borderRadius: 999 }}>
-              ?? Cart
+              <CartIcon />
+              Cart
               <span className="cart-count">{totalQty}</span>
             </button>
             <button onClick={() => onNav("admin")} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 13, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 5 }}>
