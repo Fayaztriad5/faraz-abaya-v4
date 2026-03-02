@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { WHATSAPP } from "../mockData";
 import { useCart } from "../context/CartContext";
-import { buildWhatsAppMessage } from "../utils/whatsapp";
 
 const Stars = ({ r }) => (
   <span style={{ display: "flex", gap: 2, alignItems: "center" }}>
-    {[1, 2, 3, 4, 5].map(i => (
+    {[1, 2, 3, 4, 5].map((i) => (
       <svg key={i} viewBox="0 0 20 20" fill={i <= Math.floor(r) ? "#C9A84C" : "#E5E5E5"} style={{ width: 13, height: 13 }}>
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
       </svg>
@@ -30,7 +29,7 @@ export default function ProductDetail({ p, onBack }) {
     return (
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 80px" }}>
         <button onClick={onBack} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>
-          â† Back
+          ? Back
         </button>
         <div className="font-display" style={{ fontSize: 28, color: "var(--charcoal)" }}>
           Product not found
@@ -39,39 +38,37 @@ export default function ProductDetail({ p, onBack }) {
     );
   }
 
-  const order = () => {
-    if (!size) { setErr(true); setTimeout(() => setErr(false), 2500); return; }
-    const msg = `Assalamu Alaikum! I want to order the ${p.name} (Size: ${size}) for ₹${p.price.toLocaleString()}. Please confirm availability.`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
-  };
-
-  // add to cart callback (was missing causing runtime error on render)
-  const addToCart = () => {
+  function order() {
     if (!size) {
       setErr(true);
       setTimeout(() => setErr(false), 2500);
       return;
     }
-    // pass selected size and currently visible image URL
+    const msg = `Assalamu Alaikum! I want to order the ${p.name} (Size: ${size}) for ?${p.price.toLocaleString()}. Please confirm availability.`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+  }
+
+  function addToCart() {
+    if (!size) {
+      setErr(true);
+      setTimeout(() => setErr(false), 2500);
+      return;
+    }
     addItem(p, size, p.imgs[img]);
     openCart();
-  };
+  }
 
   return (
     <div className="fade-up" style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 80px" }}>
-      {/* Back */}
       <button onClick={onBack} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>
-        ← Back
+        ? Back
       </button>
 
       <div className="detail-grid">
-
-        {/* ── Gallery ── */}
         <div>
           <div style={{ borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", marginBottom: 10 }}>
             <img src={p.imgs[img]} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all .5s" }} />
           </div>
-          {/* Thumbnails */}
           <div style={{ display: "flex", gap: 8 }}>
             {p.imgs.map((src, i) => (
               <div key={i} className={`thumb ${img === i ? "active" : ""}`} onClick={() => setImg(i)} style={{ flex: 1, height: 70 }}>
@@ -81,36 +78,34 @@ export default function ProductDetail({ p, onBack }) {
           </div>
         </div>
 
-        {/* ── Info ── */}
         <div>
           <div style={{ fontSize: 11, color: "var(--gold)", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", fontFamily: "'Jost',sans-serif" }}>{p.category}</div>
           <div className="font-display detail-title" style={{ fontWeight: 600, color: "var(--charcoal)", lineHeight: 1.15, margin: "6px 0 10px" }}>{p.name}</div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
             <Stars r={p.rating} />
-            <span style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif" }}>{p.rating} · {p.reviews} reviews</span>
+            <span style={{ fontSize: 13, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif" }}>{p.rating} � {p.reviews} reviews</span>
           </div>
 
           <div className="divider" />
 
-          <div className="font-display detail-price" style={{ fontWeight: 600, color: "var(--charcoal)", marginBottom: 4 }}>₹{p.price.toLocaleString()}</div>
+          <div className="font-display detail-price" style={{ fontWeight: 600, color: "var(--charcoal)", marginBottom: 4 }}>?{p.price.toLocaleString()}</div>
           <div style={{ fontSize: 12, color: "var(--text-muted)", fontFamily: "'Jost',sans-serif", marginBottom: 16 }}>Inclusive of all taxes</div>
 
           <div style={{ background: "var(--pearl-dark)", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 16 }}>✨</span>
+            <span style={{ fontSize: 16 }}>?</span>
             <span style={{ fontFamily: "'Jost',sans-serif", fontSize: 13 }}><strong>Fabric:</strong> {p.fabric}</span>
           </div>
 
           <p style={{ fontFamily: "'Jost',sans-serif", fontSize: 14, color: "#555", lineHeight: 1.75, marginBottom: 20 }}>{p.desc}</p>
 
-          {/* Size selector */}
           <div style={{ marginBottom: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
               <span style={{ fontFamily: "'Jost',sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--charcoal)" }}>Select Size</span>
-              {err && <span style={{ fontSize: 12, color: "#e53e3e", fontFamily: "'Jost',sans-serif" }}>⚠ Please select a size</span>}
+              {err && <span style={{ fontSize: 12, color: "#e53e3e", fontFamily: "'Jost',sans-serif" }}>? Please select a size</span>}
             </div>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              {["52", "54", "56", "58"].map(s => (
+              {["52", "54", "56", "58"].map((s) => (
                 <button key={s} className={`size-btn ${size === s ? "active" : ""}`} onClick={() => setSize(s)}>
                   {s}
                 </button>
@@ -120,9 +115,8 @@ export default function ProductDetail({ p, onBack }) {
 
           <div className="divider" />
 
-          {/* Trust badges — above CTA */}
           <div className="trust-grid" style={{ marginBottom: 16 }}>
-            {[["🚚", "Free Delivery", "Orders ₹1999+"], ["🔄", "Easy Returns", "7-day policy"], ["✅", "100% Authentic", "Original fabric"]].map(([icon, t, s]) => (
+            {[["??", "Free Delivery", "Orders ?1999+"], ["??", "Easy Returns", "7-day policy"], ["?", "100% Authentic", "Original fabric"]].map(([icon, t, s]) => (
               <div className="trust-card" key={t}>
                 <div style={{ fontSize: 20 }}>{icon}</div>
                 <div style={{ fontSize: 11, fontWeight: 700, color: "var(--charcoal)", fontFamily: "'Jost',sans-serif", marginTop: 4 }}>{t}</div>
@@ -131,7 +125,6 @@ export default function ProductDetail({ p, onBack }) {
             ))}
           </div>
 
-          {/* ── Sticky CTA on mobile, static on desktop ── */}
           <div className="detail-cta-wrap">
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <button className="btn-wa" onClick={order} style={{ width: "100%", padding: "14px 16px", borderRadius: 18, display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 15, fontFamily: "'Jost',sans-serif", fontWeight: 600 }}>
