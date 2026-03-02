@@ -24,12 +24,37 @@ export default function ProductDetail({ p, onBack }) {
   const [size, setSize] = useState("");
   const [img, setImg] = useState(0);
   const [err, setErr] = useState(false);
-  const { addItem, openCart, setItemSize } = useCart();
+  const { addItem, openCart } = useCart();
+
+  if (!p) {
+    return (
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 80px" }}>
+        <button onClick={onBack} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", fontFamily: "'Jost',sans-serif", fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>
+          â† Back
+        </button>
+        <div className="font-display" style={{ fontSize: 28, color: "var(--charcoal)" }}>
+          Product not found
+        </div>
+      </div>
+    );
+  }
 
   const order = () => {
     if (!size) { setErr(true); setTimeout(() => setErr(false), 2500); return; }
     const msg = `Assalamu Alaikum! I want to order the ${p.name} (Size: ${size}) for ₹${p.price.toLocaleString()}. Please confirm availability.`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+
+  // add to cart callback (was missing causing runtime error on render)
+  const addToCart = () => {
+    if (!size) {
+      setErr(true);
+      setTimeout(() => setErr(false), 2500);
+      return;
+    }
+    // pass selected size and currently visible image URL
+    addItem(p, size, p.imgs[img]);
+    openCart();
   };
 
   return (
