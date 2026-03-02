@@ -3,6 +3,7 @@ import { hashText } from "../utils/auth";
 
 const AUTH_STORAGE_KEY = "fa_admin_auth_v1";
 const AUTH_TTL_MS = 1000 * 60 * 60 * 8; // 8 hours
+const DEFAULT_ADMIN_PW_HASH = "e39b0fae7b7a0a82e56d01632187796a0553708fb9a2d0ef1af0a8351093d4d6"; // Regi@Faraz@232416
 
 const AuthContext = createContext(null);
 
@@ -26,7 +27,9 @@ export function AuthProvider({ children }) {
   const [authed, setAuthed] = useState(() => readStoredAuth().authed);
 
   const login = async (password) => {
-    const configuredHash = (process.env.REACT_APP_ADMIN_PW_HASH || "").trim().toLowerCase();
+    const envHash = (process.env.REACT_APP_ADMIN_PW_HASH || "").trim().toLowerCase();
+    const configuredHash =
+      envHash && envHash !== "your_sha256_hash_here" ? envHash : DEFAULT_ADMIN_PW_HASH;
     if (!configuredHash) {
       return { ok: false, error: "Admin login not configured. Set REACT_APP_ADMIN_PW_HASH." };
     }
